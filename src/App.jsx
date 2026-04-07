@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 import Timesheets from "./pages/Timesheets";
 import ClockIn from "./pages/ClockIn";
 import CrewManager from "./pages/CrewManager";
+import Analytics from "./pages/Analytics";
+import ImportExport from "./pages/ImportExport";
 import Wages from "./pages/Wages";
 import Admin from "./pages/Admin";
 
@@ -23,6 +25,8 @@ function AppInner() {
 
   const pages = {
     timesheets: <Timesheets />,
+    analytics: <Analytics />,
+    import: <ImportExport />,
     clockin: <ClockIn />,
     crew: <CrewManager />,
     wages: <Wages />,

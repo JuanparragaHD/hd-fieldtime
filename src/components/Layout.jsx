@@ -4,7 +4,8 @@ import { useAuth } from "../lib/auth";
 const navItems = {
   accounting: [
     { id: "timesheets", label: "Timesheets", icon: "⊞" },
-    { id: "summary", label: "Summary", icon: "◈" },
+    { id: "analytics", label: "Analytics", icon: "◈" },
+    { id: "import", label: "Import / Export", icon: "⇅" },
     { id: "wages", label: "Wages", icon: "$" },
     { id: "admin", label: "Admin Panel", icon: "⚙" },
   ],

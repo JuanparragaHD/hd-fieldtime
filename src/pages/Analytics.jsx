@@ -191,13 +191,15 @@ export default function Analytics() {
   const maxCrewHrs = byCrew.length > 0 ? byCrew[0][1].hrs : 1;
   const maxWorkerHrs = topWorkers.length > 0 ? topWorkers[0].hrs : 1;
 
+  const activeProjects = new Set(filtered.map(e => e.project).filter(Boolean)).size;
+
   const kpiCards = [
     { label: "Total hours", value: totalHrs.toFixed(1), suffix: " hrs", color: "#2D5016" },
-    { label: "Regular hours", value: totalRegular.toFixed(1), suffix: " hrs", color: "#3d6b1e" },
     { label: "OT hours", value: totalOT.toFixed(1), suffix: " hrs", color: "#C45C1A" },
-    { label: "Labor cost", value: `$${totalCost.toLocaleString("en-US",{maximumFractionDigits:0})}`, suffix: "", color: "#2D5016" },
     { label: "OT cost", value: `$${otCost.toLocaleString("en-US",{maximumFractionDigits:0})}`, suffix: "", color: "#C45C1A" },
-    { label: "Active workers", value: uniqueWorkers, suffix: "", color: "#2D5016" },
+    { label: "Labor cost", value: `$${totalCost.toLocaleString("en-US",{maximumFractionDigits:0})}`, suffix: "", color: "#2D5016" },
+    { label: "Active projects", value: activeProjects, suffix: "", color: "#2D5016" },
+    { label: "Active workers", value: uniqueWorkers, suffix: "", color: "#3d6b1e" },
   ];
 
   const card = (children, style={}) => (

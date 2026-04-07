@@ -25,7 +25,7 @@ function parseRow(row) {
 }
 
 export default function ImportExport() {
-  const { entries, addEntry } = useTimesheets();
+  const { entries, bulkImport } = useTimesheets();
   const [tab, setTab] = useState("import");
   const [dragOver, setDragOver] = useState(false);
   const [preview, setPreview] = useState(null);
@@ -91,32 +91,9 @@ export default function ImportExport() {
     if (file) parseFile(file);
   };
 
-  const confirmImport = () => {
+  const confirmImport = async () => {
     setImporting(true);
-    let count = 0;
-    preview.rows.forEach(row => {
-      // Find worker id by name
-      const totalHrs = parseFloat(row.totalHours) || 0;
-      const otHrs = Math.max(0, totalHrs - 10);
-      addEntry({
-        workerName: row.name,
-        workerId: null,
-        company: "Construction", // default, can be improved
-        crew: row.crew,
-        date: row.date,
-        clockIn: row.clockIn,
-        clockOut: row.clockOut,
-        breakMins: row.breakMins,
-        totalHours: totalHrs,
-        otHours: otHrs,
-        project: row.project,
-        costCode: row.costCode,
-        status: row.status,
-        wage: null,
-        otWage: null,
-      });
-      count++;
-    });
+    const count = await bulkImport(preview.rows);
     setImported(count);
     setPreview(null);
     setImporting(false);
